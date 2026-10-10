@@ -1,0 +1,29 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import assert from 'node:assert/strict';
+import {createRequire} from 'node:module';
+const require=createRequire('C:/Users/rosha/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/package.json');
+const {chromium}=require('playwright');
+const browser=await chromium.launch({executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe',headless:true});
+const page=await browser.newPage({viewport:{width:1440,height:1000}});
+await page.addInitScript(()=>{sessionStorage.setItem('install-dismissed','true');});
+const errors=[],broken=[];page.on('pageerror',e=>errors.push(e.message));page.on('response',r=>{if(r.status()>=400&&r.url().startsWith('http://127.0.0.1:4176'))broken.push(r.url());});
+const root=path.resolve('university-website/site'),files=fs.readdirSync(root,{recursive:true}).filter(f=>f.endsWith('.html'));
+for(const file of files){await page.goto('http://127.0.0.1:4176/'+file.replaceAll('\\','/'),{waitUntil:'domcontentloaded'});await page.waitForTimeout(200);console.log(file,await page.title());const links=await page.locator('[src],a[href],script[src],link[href]').evaluateAll(els=>els.flatMap(e=>['src','href'].map(a=>e.getAttribute(a)).filter(Boolean)).filter(s=>!s.startsWith('http')&&!s.startsWith('mailto:')&&!s.startsWith('itms-services:')&&!s.startsWith('data:')&&!s.startsWith('javascript:')));for(const link of links){const target=decodeURIComponent(link.split('#')[0].split('?')[0]);if(target&&!fs.existsSync(path.join(root,target)))broken.push(file+': '+link);}}
+await page.goto('http://127.0.0.1:4176/research/domain.html');await page.locator('#chapter-1').click();assert.match(await page.locator('#research-panel h2').innerText(),/Research Gap/);await page.locator('#chapter-4').click();assert.match(await page.locator('#research-panel h2').innerText(),/Research Problem/);await page.locator('#chapter-3').click();await page.getByRole('button',{name:'Card View',exact:true}).click();assert(await page.locator('.research-panel-content').innerText());
+await page.goto('http://127.0.0.1:4176/research/milestones.html');await page.locator('#milestone-select').selectOption('4');assert.match(await page.locator('#milestone-detail').innerText(),/Viva/);
+await page.goto('http://127.0.0.1:4176/research/documents.html');assert.equal(await page.locator('iframe').count(),0);assert.equal(await page.locator('.research-pdf-row').count(),6);
+await page.goto('http://127.0.0.1:4176/explore/demo.html');await page.locator('.ld-scan-button').click();await page.waitForTimeout(1300);assert.match(await page.locator('#demo-leaf').innerText(),/38.4%/);await page.getByRole('button',{name:'Nutrients',exact:true}).click();await page.locator('.ld-scan-button').click();await page.waitForTimeout(1300);assert.match(await page.locator('#demo-leaf').innerText(),/31.1%/);await page.locator('.chat-option-btn').first().click();await page.waitForTimeout(550);assert.match(await page.locator('.chat-body').innerText(),/Can you see insects/);
+await page.goto('http://127.0.0.1:4176/explore/logs.html');assert.equal(await page.locator('.gallery-card:visible').count(),6);await page.locator('.view-logs-link').first().click();assert.equal(await page.locator('dialog[open]').count(),1);await page.keyboard.press('Escape');
+await page.goto('http://127.0.0.1:4176/');await page.waitForTimeout(2500);await page.screenshot({path:'university-website/docs/home-desktop.png'});await page.locator('.theme-toggle-btn').first().click();assert.equal(await page.locator('html').getAttribute('data-theme'),'dark');await page.locator('.theme-toggle-btn').first().click();
+await page.setViewportSize({width:390,height:844});await page.reload();await page.waitForTimeout(1500);await page.locator('.mobile-menu-btn').click();assert(await page.locator('#mobile-navigation').isVisible());await page.locator('#mobile-navigation').getByRole('link',{name:'Domain',exact:true}).click();assert.match(page.url(),/research\/domain.html/);await page.screenshot({path:'university-website/docs/domain-mobile.png'});
+for(const file of files){await page.goto('http://127.0.0.1:4176/'+file.replaceAll('\\','/'),{waitUntil:'domcontentloaded'});const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2);if(overflow)errors.push('Mobile overflow: '+file);}
+await page.emulateMedia({reducedMotion:'reduce'});await page.goto('http://127.0.0.1:4176/explore/demo.html');await page.locator('.ld-scan-button').click();assert.match(await page.locator('#demo-leaf').innerText(),/38.4%/);
+await page.setViewportSize({width:1440,height:1000});await page.goto('http://127.0.0.1:4176/manage/index.html');await page.getByRole('button',{name:'Add research log',exact:true}).click();await page.locator('dialog [name="title"]').fill('Verification log');await page.locator('dialog [name="desc"]').fill('Browser-local CRUD verification.');await page.getByRole('button',{name:'Save log',exact:true}).click();assert.match(await page.locator('.admin-table').innerText(),/Verification log/);await page.goto('http://127.0.0.1:4176/explore/logs.html');await page.locator('#gallery input').fill('Verification log');assert.equal(await page.locator('.gallery-card:visible').count(),1);await page.evaluate(()=>localStorage.removeItem('lununeth-static-logs'));
+await page.goto('http://127.0.0.1:4176/');await page.locator('.site-footer').scrollIntoViewIfNeeded();await page.waitForTimeout(1800);assert.equal(await page.locator('.footer-meadow.is-ready').count(),1);await page.screenshot({path:'university-website/docs/footer-desktop.png'});
+await browser.close();console.log(JSON.stringify({errors,broken:[...new Set(broken)]},null,2));assert.deepEqual(errors,[]);assert.deepEqual([...new Set(broken)],[]);console.log('Interaction, link, mobile, and reduced-motion checks passed.');
+
+
+
+
+

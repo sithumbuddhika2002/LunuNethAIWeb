@@ -1,0 +1,2 @@
+GSAP 3.15.0 — license: https://gsap.com/standard-license/
+Original distribution license headers are retained.

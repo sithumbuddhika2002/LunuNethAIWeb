@@ -1,0 +1,7 @@
+.drive-library-actions{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;margin-top:1.5rem}
+.drive-library-actions button{font:inherit;cursor:pointer}
+.drive-library-actions button:disabled{opacity:.65;cursor:wait}
+.drive-library-frame{border:1px solid var(--research-border);border-radius:16px;overflow:hidden;background:#fff}
+.drive-library-frame iframe{display:block;width:100%;height:640px;border:0;color-scheme:light}
+@media(max-width:600px){.drive-library-frame iframe{height:560px}.drive-library-actions>*{width:100%;justify-content:center}}
+#drive-status{color:var(--text-secondary);font-size:.8rem;max-width:42rem}.drive-library-actions button{flex-shrink:0}
