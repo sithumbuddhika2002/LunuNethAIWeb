@@ -39,7 +39,7 @@ const result=await page.evaluate(({snapshots})=>{
    doc.querySelector('.nav-links').innerHTML=links;
    doc.querySelector('.navbar').insertAdjacentHTML('beforeend',`<div class="mobile-dropdown" id="mobile-navigation" hidden>${[...top,...extra].map(([name,url])=>`<a href="${url}" ${url===file?'aria-current="page" class="active"':''}>${name}</a>`).join('')}</div>`);
    doc.querySelector('.mobile-menu-btn').setAttribute('aria-controls','mobile-navigation');
-   const pf=doc.querySelector('#footer-platform-links');pf.innerHTML=[...top,...extra].map(([name,url])=>`<li><a href="${url}">${name}</a></li>`).join('');
+   const pf=doc.querySelector('#footer-platform-links');pf.innerHTML=[...top,...extra.filter(([,url])=>url!==routes.simulators&&url!==routes.gallery)].map(([name,url])=>`<li><a href="${url}">${name}</a></li>`).join('');
    for(const a of doc.querySelectorAll('.site-footer-group a'))if(a.getAttribute('href')==='#')a.setAttribute('href','project/information.html#'+(a.textContent.includes('Privacy')?'privacy':'terms'));
    normalize(doc,file);
    doc.querySelectorAll('link[rel="preload"]').forEach(n=>n.remove());
