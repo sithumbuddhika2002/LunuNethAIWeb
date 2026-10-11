@@ -57,7 +57,7 @@ function TeamSection() {
         {
             id: 2,
             name: 'Vidura Yasassri',
-            regNo: 'IT21024826',
+            regNo: 'IT22054890',
             componentName: 'Purple Blotch Disease Detection',
             bio: 'Directs development sprints, microservice container assemblies, and designs the FastAPI consolidated agent controller routing. Lead researcher on Purple Blotch detection and severity classification.',
             skills: ['Systems Architecture', 'Docker Dev', 'FastAPI Routing', 'MongoDB Integration', 'TinyML Quantization', 'CNNs & ViTs'],
@@ -69,7 +69,7 @@ function TeamSection() {
         {
             id: 3,
             name: 'Sithum Buddhika',
-            regNo: 'IT21027716',
+            regNo: 'IT22087256',
             componentName: 'Trilingual Chatbot & Context-Aware Diagnostics',
             bio: 'Architect of the Spatio-Temporal Graph Neural Network. Programs multi-agent forecast probabilities, MongoDB connections, and the trilingual chatbot conversational routing.',
             skills: ['GNN Modeling', 'Spatio-Temporal GNN', 'Database Clustering', 'Bayesian Networks', 'mBERT & Seq2Seq', 'NLP Diagnostics'],
@@ -81,7 +81,7 @@ function TeamSection() {
         {
             id: 4,
             name: 'Senura Sanketh',
-            regNo: 'IT21033494',
+            regNo: 'IT22226464',
             componentName: 'Thrips Pest Detection',
             bio: 'Responsible for PyTorch object detection networks. Trained and validated Faster R-CNN on crop-thrips coordinates, using Sliced Aided Hyper Inference (SAHI) for small pest localization.',
             skills: ['PyTorch DL', 'Object Localization', 'EfficientNet CAM', 'Model Optimization', 'YOLOv8 & SAHI', 'IPM Scaling'],
@@ -93,7 +93,7 @@ function TeamSection() {
         {
             id: 5,
             name: 'Kaveesha Nayanaka',
-            regNo: 'IT21021268',
+            regNo: 'IT22142528',
             componentName: 'Nutrient Deficiency Detection',
             bio: 'Builds cross-platform UI features using Flutter. Connects SQLite on-device caches, optimizes local TFLite operations, and designed the leaf nutrient deficiency semantic classifier.',
             skills: ['Flutter/Dart', 'Mobile DB Caching', 'TFLite Integration', 'Offline Inference', 'Feature Fusion', 'SHAP Explainability'],

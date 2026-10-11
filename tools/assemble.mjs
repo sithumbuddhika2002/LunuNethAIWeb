@@ -23,6 +23,7 @@ const result=await page.evaluate(({snapshots})=>{
      else if(val.startsWith('/model/'))val=val.slice(1);
      else if(val.startsWith('/assets/'))val=val.slice(1);
      else if(val==='/logo.jpeg')val='assets/images/logo.webp';
+     else if(val==='/downloads/android/LunuNeth_AI.apk')val='https://drive.google.com/uc?export=download&id=1PBtBxSdDOxt97Hn2UDrxaGFxmqM9WCY6';
      else if(val.startsWith('/downloads/'))val='https://lununethai.com'+val;
      else if(val.startsWith('/')){const [p,hash]=val.slice(1).split('#');val=(routes[p||'home']||'index.html')+(hash?'#'+hash:'');}
      else if(val.startsWith('#'))val=file+val;

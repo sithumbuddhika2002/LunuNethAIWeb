@@ -22,7 +22,7 @@ There is no npm install or build step for the delivered site. Upload **only the 
 
 ## University guide and remaining information
 
-The provided guide requires a maximum **20 MB** uploaded site. The deployable directory is approximately **19.72 MB (decimal)**. Keep installers on an external download host; the existing Android APK alone is approximately 102 MB. The download links use `https://lununethai.com`; verify that the release host contains the intended installers before submission. External Google Drive document links were retained from the original site; their permissions and availability are controlled by their owners.
+The provided guide requires a maximum **20 MB** uploaded site. The deployable directory is approximately **20.76 MB (decimal)**; the packaged ZIP is **17.29 MB**. If the limit applies to extracted files, further asset reduction is needed. Keep installers on an external download host; the existing Android APK alone is approximately 102 MB. Android APK buttons use the supplied Google Drive direct-download link. Drive may display a confirmation screen and requires public file access. Other platform links still require verification. External Google Drive document links were retained from the original site; their permissions and availability are controlled by their owners.
 
 The guide lists WordPress, HTML and CSS as permitted technologies. This implementation includes JavaScript as explicitly requested, including JavaScript animation libraries. Confirm course acceptance of JavaScript before submitting.
 
@@ -30,7 +30,7 @@ Official assessment dates and marks were not supplied. They are marked **Awaitin
 
 ## Google Drive documents
 
-The original custom document rows, search, category groups, and separate View / Download buttons have been restored. There is no embedded Google Drive folder. The saved list contains the nine files verified in the supplied project folder on 11 October 2026, including renamed proposals, the individual thesis and Project Proposal.pptx.
+The original custom document rows, search, category groups, and separate View / Download buttons have been restored. There is no embedded Google Drive folder. The saved list contains 14 files: four proposal reports, four individual theses, one group thesis, one research paper, one evidence report, and three presentations. Proposal Reports, Individual Thesis, and Group Thesis were refreshed from the supplied Drive folder on 11 October 2026.
 
 Automatic future updates require the read-only Apps Script feed in `integration/Code.gs`. Follow `integration/SETUP.md` to deploy it, then set the deployed URL in `site/assets/js/drive-config.js`. Until that is configured, the website explicitly says it is showing a saved list. The code is prepared and refresh behavior has been tested with controlled responses; a live feed has not been deployed or verified.
 
